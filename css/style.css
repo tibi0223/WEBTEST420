@@ -191,7 +191,7 @@ strong {
    ============================================= */
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 55vh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -237,19 +237,23 @@ strong {
   max-width: var(--max-w);
   margin: 0 auto;
   width: 100%;
-  padding: 6rem 1.5rem 3rem;
+  padding: 5rem 1.5rem 2.5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 @media (min-width: 1024px) {
   .hero__content {
-    padding: 8rem 3rem 4rem;
-    align-items: center;
-    text-align: center;
+    padding: 6rem 3rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto;
+    align-items: start;
+    column-gap: 2rem;
+    text-align: left;
   }
 }
 
@@ -269,9 +273,31 @@ strong {
   max-width: 600px;
 }
 
-/* Changed from .hero__btn-red to .hero__btn-gold */
-.hero__btn-gold {
-  margin-top: 1rem;
+/* Desktop: title and subtitle in column 1, USP box in column 2 */
+@media (min-width: 1024px) {
+  .hero__title {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .hero__subtitle {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .hero__btn-gold {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  .hero__usp {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    margin-top: 0;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: rgba(0,0,0,0.55);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    align-self: start;
+  }
 }
 
 .hero__usp {
