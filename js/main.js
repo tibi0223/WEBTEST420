@@ -36,20 +36,28 @@ if (reviewsCarousel && reviewsDots.length) {
   }, { passive: true });
 }
 
-// Contact form dummy submit
+// Contact form status handling
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const btn = contactForm.querySelector('.contact__btn');
+  // Check URL for status
+  const urlParams = new URLSearchParams(window.location.search);
+  const status = urlParams.get('status');
+  const btn = contactForm.querySelector('button[type="submit"]');
+
+  if (status === 'success') {
     btn.textContent = 'Elküldve! ✓';
     btn.style.background = '#1b5e20';
-    contactForm.reset();
+    // Clear status from URL after 3 seconds
     setTimeout(() => {
+      window.history.replaceState({}, document.title, window.location.pathname + '#contact');
       btn.textContent = 'Ingyenes felmérést kérek';
       btn.style.background = '';
-    }, 3000);
-  });
+    }, 5000);
+  } else if (status === 'error') {
+    btn.textContent = 'Hiba történt! ✕';
+    btn.style.background = '#b71c1c';
+    setTimeout(() => btn.textContent = 'Ingyenes felmérést kérek', 5000);
+  }
 }
 
 // Force scroll to top on load to prevent jumping to form
