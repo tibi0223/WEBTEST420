@@ -16,6 +16,8 @@
   --gold-dark: #aa8c2c;
   --text:      #ffffff;
   --text-muted:#b3b3b3;
+  --accent-red: #e31c25;
+  --accent-red-dark: #b3191f;
   --radius:    16px;
   --max-w:     1200px; /* Fully responsive */
 }
@@ -109,9 +111,13 @@ strong {
 }
 
 .btn--primary {
-  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
-  color: #000;
-  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.2);
+  background: linear-gradient(135deg, var(--accent-red) 0%, var(--accent-red-dark) 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(227, 28, 37, 0.3);
+}
+
+.btn--primary:hover {
+  box-shadow: 0 8px 24px rgba(227, 28, 37, 0.4);
 }
 
 .btn--outline {
@@ -592,7 +598,7 @@ strong {
   align-items: center;
   justify-content: center;
   gap: 0.625rem;
-  background: #c62828;
+  background: linear-gradient(135deg, var(--accent-red) 0%, var(--accent-red-dark) 100%);
   color: #fff;
   font-size: 1rem;
   font-weight: 700;
@@ -601,7 +607,7 @@ strong {
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
   transition: opacity 0.2s, transform 0.15s;
-  border: 1px solid var(--gold);
+  box-shadow: 0 4px 12px rgba(227, 28, 37, 0.25);
 }
 
 .prof__btn:active {
