@@ -1506,7 +1506,7 @@ strong {
 }
 
 .contact__input {
-  background: rgba(220, 220, 220, 0.95);
+  background: #ffffff;
   border: 2px solid transparent;
   border-radius: 12px;
   padding: 1rem 1.25rem;
