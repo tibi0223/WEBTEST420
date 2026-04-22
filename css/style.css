@@ -1265,7 +1265,7 @@ strong {
   pointer-events: none;
   user-select: none;
   -webkit-user-select: none;
-  padding: 2.5rem 0;
+  padding: 1.25rem 0;
   background: #ffffff;
   border-top: 1px solid rgba(0,0,0,0.05);
   border-bottom: 1px solid rgba(0,0,0,0.05);
@@ -1274,15 +1274,15 @@ strong {
 .partners__track {
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 2.5rem;
   width: max-content;
   animation: marquee 30s linear infinite;
 }
 
 .partners__track img {
-  width: 120px;
-  height: 70px;
-  margin: 0 15px;
+  width: 100px;
+  height: 60px;
+  margin: 0 12px;
   object-fit: contain;
   flex-shrink: 0;
   filter: grayscale(0.2);
