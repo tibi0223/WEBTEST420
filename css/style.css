@@ -1572,6 +1572,23 @@ strong {
   min-height: 8rem;
 }
 
+.form-separator {
+  display: block;
+  text-align: center;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.contact__call-text {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+
 .contact__check {
   display: flex;
   align-items: flex-start;
