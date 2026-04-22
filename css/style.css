@@ -103,6 +103,16 @@ strong {
   -webkit-tap-highlight-color: transparent;
   border: none;
   margin: 0 auto;
+  width: auto;
+  min-width: 0;
+}
+
+.btn svg {
+  flex-shrink: 0;
+}
+
+.btn span {
+  white-space: nowrap;
 }
 
 .btn:hover {
@@ -559,7 +569,7 @@ strong {
    ============================================= */
 .professional {
   position: relative;
-  background: url('../assets/images/tervezo.jpg') center center / cover no-repeat;
+  background: var(--bg);
 }
 
 .prof__content {
@@ -577,7 +587,7 @@ strong {
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.02em;
-  color: #000;
+  color: var(--text);
   text-align: center;
 }
 
@@ -957,7 +967,7 @@ strong {
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
-  padding-top: 0.25rem;
+  padding-top: 0;
   text-align: left;
 }
 
@@ -1044,6 +1054,23 @@ strong {
   text-align: center;
   line-height: 1.5;
   width: 90%;
+}
+
+.handover__card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.handover__card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
 }
 
 .handover__btn {
