@@ -956,6 +956,7 @@ strong {
   height: 90px;
   object-fit: contain;
   flex-shrink: 0;
+  margin-top: 0;
 }
 
 .installation__pet-content {
@@ -963,6 +964,7 @@ strong {
   flex-direction: column;
   gap: 0.375rem;
   text-align: left;
+  margin-top: 0;
 }
 
 .installation__pet-title {
