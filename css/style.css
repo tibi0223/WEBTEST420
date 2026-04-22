@@ -559,7 +559,12 @@ strong {
    ============================================= */
 .professional {
   position: relative;
-  background: url('../assets/images/tervezo.jpg') center center / cover no-repeat;
+  background: linear-gradient(to bottom, 
+    rgba(212, 183, 131, 0.8) 0%, 
+    rgba(212, 183, 131, 0.4) 30%, 
+    rgba(212, 183, 131, 0.2) 60%, 
+    rgba(20, 20, 20, 0.9) 100%),
+    url('../assets/images/tervezo.jpg') center center / cover no-repeat;
 }
 
 .prof__content {
