@@ -991,10 +991,14 @@ strong {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
   color: var(--gold);
   margin-top: 2.5rem;
   width: 100%;
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
 }
 
 .installation__duration-text {
