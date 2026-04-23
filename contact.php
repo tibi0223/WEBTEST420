@@ -4,6 +4,9 @@
  * Enhanced with CSRF protection, rate limiting, and security features
  */
 
+// Include config for secrets
+require_once 'config.php';
+
 // Start session for CSRF and rate limiting
 session_start();
 
@@ -116,6 +119,45 @@ $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
 
 // Send email
 if (mail($recipient, $subject, $email_body, $headers)) {
+    
+    // --- HUBSPOT INTEGRATION ---
+    $hubspot_token = HUBSPOT_TOKEN;
+    $hubspot_url = "https://api.hubapi.com/crm/v3/objects/contacts";
+    
+    // Map form service values to HubSpot dropdown internal values/labels
+    $service_raw = $_POST["service"] ?? "";
+    $hs_service_mapping = [
+        'klimatelepites' => 'Telepítés',
+        'eves_karbantartas' => 'Éves karbantartás',
+        'mely_tisztitas' => 'Mély tisztítás',
+        'egyeb' => 'Egyéb'
+    ];
+    $hs_service_value = $hs_service_mapping[$service_raw] ?? 'Egyéb';
+    
+    $hubspot_data = [
+        "properties" => [
+            "email" => $email,
+            "firstname" => $name,
+            "phone" => $phone,
+            "szolgaltatas_tipusa" => $hs_service_value,
+            "lifecyclestage" => "lead"
+        ]
+    ];
+    
+    $ch = curl_init($hubspot_url);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($hubspot_data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        "Authorization: Bearer " . $hubspot_token,
+        "Content-Type: application/json"
+    ]);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // Timeout beállítása, hogy ne akassza meg a formot ha lassú a Hubspot
+    curl_setopt($ch, CURLOPT_TIMEOUT, 5); 
+    
+    $response = curl_exec($ch);
+    curl_close($ch);
+    // ---------------------------
+
     // Regenerate CSRF token after successful submission
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     header("Location: index.html?status=success#contact");
