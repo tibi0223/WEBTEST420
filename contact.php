@@ -48,14 +48,14 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
 
 // Validate CSRF token
 if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-    header("Location: index.html?status=error#contact");
+    header("Location: index.php?status=error&type=csrf#contact");
     exit;
 }
 
 // Honeypot check (hidden field)
 if (!empty($_POST['website'])) {
     // Bot detected, but redirect silently to avoid revealing it's a honeypot
-    header("Location: index.html?status=success#contact");
+    header("Location: index.php?status=success#contact");
     exit;
 }
 
@@ -86,7 +86,7 @@ if (!empty($phone)) {
 }
 
 if (!empty($errors)) {
-    header("Location: index.html?status=error&fields=" . implode(',', $errors) . "#contact");
+    header("Location: index.php?status=error&fields=" . implode(',', $errors) . "#contact");
     exit;
 }
 
@@ -121,48 +121,50 @@ $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
 if (mail($recipient, $subject, $email_body, $headers)) {
     
     // --- HUBSPOT INTEGRATION ---
-    $hubspot_token = HUBSPOT_TOKEN;
-    $hubspot_url = "https://api.hubapi.com/crm/v3/objects/contacts";
-    
-    // Map form service values to HubSpot dropdown internal values/labels
-    $service_raw = $_POST["service"] ?? "";
-    $hs_service_mapping = [
-        'klimatelepites' => 'Telepítés',
-        'eves_karbantartas' => 'Éves karbantartás',
-        'mely_tisztitas' => 'Mély tisztítás',
-        'egyeb' => 'Egyéb'
-    ];
-    $hs_service_value = $hs_service_mapping[$service_raw] ?? 'Egyéb';
-    
-    $hubspot_data = [
-        "properties" => [
-            "email" => $email,
-            "firstname" => $name,
-            "phone" => $phone,
-            "szolgaltatas_tipusa" => $hs_service_value,
-            "lifecyclestage" => "lead"
-        ]
-    ];
-    
-    $ch = curl_init($hubspot_url);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($hubspot_data));
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        "Authorization: Bearer " . $hubspot_token,
-        "Content-Type: application/json"
-    ]);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    // Timeout beállítása, hogy ne akassza meg a formot ha lassú a Hubspot
-    curl_setopt($ch, CURLOPT_TIMEOUT, 5); 
-    
-    $response = curl_exec($ch);
-    curl_close($ch);
+    if (defined('HUBSPOT_TOKEN')) {
+        $hubspot_token = HUBSPOT_TOKEN;
+        $hubspot_url = "https://api.hubapi.com/crm/v3/objects/contacts";
+        
+        // Map form service values to HubSpot dropdown internal values/labels
+        $service_raw = $_POST["service"] ?? "";
+        $hs_service_mapping = [
+            'klimatelepites' => 'Telepítés',
+            'eves_karbantartas' => 'Éves karbantartás',
+            'mely_tisztitas' => 'Mély tisztítás',
+            'egyeb' => 'Egyéb'
+        ];
+        $hs_service_value = $hs_service_mapping[$service_raw] ?? 'Egyéb';
+        
+        $hubspot_data = [
+            "properties" => [
+                "email" => $email,
+                "firstname" => $name,
+                "phone" => $phone,
+                "szolgaltatas_tipusa" => $hs_service_value,
+                "lifecyclestage" => "lead"
+            ]
+        ];
+        
+        $ch = curl_init($hubspot_url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($hubspot_data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Authorization: Bearer " . $hubspot_token,
+            "Content-Type: application/json"
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // Timeout beállítása, hogy ne akassza meg a formot ha lassú a Hubspot
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5); 
+        
+        $response = curl_exec($ch);
+        curl_close($ch);
+    }
     // ---------------------------
 
     // Regenerate CSRF token after successful submission
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-    header("Location: index.html?status=success#contact");
+    header("Location: index.php?status=success#contact");
 } else {
-    header("Location: index.html?status=error#contact");
+    header("Location: index.php?status=error&type=mail#contact");
 }
 exit;
 ?>

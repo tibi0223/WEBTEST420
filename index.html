@@ -1,3 +1,9 @@
+<?php 
+session_start(); 
+if (empty($_SESSION['csrf_token'])) { 
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); 
+} 
+?>
 <!DOCTYPE html>
 <html lang="hu">
 
@@ -758,7 +764,6 @@
         <h2 class="contact__title">Kérj Ingyenes<br>Árajánlatot!</h2>
         <p class="contact__desc">Töltsd ki az alábbi űrlapot, és rövid időn belül felvesszük veled a kapcsolatot.</p>
 
-        <?php session_start(); if (empty($_SESSION['csrf_token'])) { $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); } ?>
         <form class="contact__form" id="contactForm" action="contact.php" method="POST">
           <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>" />
           <div class="contact__field"
