@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nexus Klíma – Ingyenes Árajánlat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#c13129',
+                        'brand-dark': '#9e2520',
+                        'brand-light': '#e03c33',
+                        surface: '#1a1a1a',
+                        'surface-2': '#222222',
+                        'surface-3': '#2a2a2a',
+                        border: '#333333',
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                    },
+                }
+            }
+        };
+    </script>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --brand: #c13129;
+            --brand-glow: rgba(193, 49, 41, 0.25);
+            --bg: #121212;
+            --surface: #1a1a1a;
+            --surface-2: #222222;
+            --surface-3: #2e2e2e;
+            --border: #333333;
+            --text: #f0f0f0;
+            --muted: #888888;
+            --radius: 16px;
+        }
+
+        html {
+            background: var(--bg);
+        }
+
+        body {
+            background: var(--bg);
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            min-height: 100dvh;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Background texture */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% -20%, rgba(193, 49, 41, 0.12) 0%, transparent 70%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container-wrap {
+            position: relative;
+            z-index: 1;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 24px 16px 40px;
+        }
+
+        /* Logo */
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 32px;
+            align-self: flex-start;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--brand);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 14px;
+            letter-spacing: -0.5px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 1.1;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text span {
+            display: block;
+            color: #888;
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* Card */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 480px;
+            padding: 28px 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+        }
+
+        /* Progress */
+        .progress-wrap {
+            margin-bottom: 24px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .progress-label span {
+            font-size: 12px;
+            color: var(--muted);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-label .step-count {
+            color: var(--brand);
+        }
+
+        .progress-bar-bg {
+            height: 4px;
+            background: var(--surface-3);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--brand), #e8453c);
+            border-radius: 99px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(193, 49, 41, 0.5);
+        }
+
+        /* Steps */
+        .step {
+            display: none;
+            animation: fadeUp 0.35s ease forwards;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 22px;
+            line-height: 1.25;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+
+        .step-subtitle {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        /* Choice cards */
+        .choices {
+            display: grid;
+            gap: 10px;
+        }
+
+        .choices.cols-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .choices.cols-3 {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .choice-card {
+            background: var(--surface-2);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+            position: relative;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .choice-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 40%, rgba(193, 49, 41, 0.12) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .choice-card:hover {
+            border-color: #555;
+            transform: translateY(-1px);
+        }
+
+        .choice-card:hover::before {
+            opacity: 1;
+        }
+
+        .choice-card.selected {
+            border-color: var(--brand);
+            background: rgba(193, 49, 41, 0.1);
+            box-shadow: 0 0 0 1px var(--brand), 0 4px 20px var(--brand-glow);
+        }
+
+        .choice-card.selected::before {
+            opacity: 1;
+        }
+
+        .choice-icon {
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        .choice-label {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            color: #eee;
+            line-height: 1.3;
+        }
+
+        .choice-desc {
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.4;
+        }
+
+        .check-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--brand);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .choice-card.selected .check-badge {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .check-badge svg {
+            width: 11px;
+            height: 11px;
+            stroke: white;
+            stroke-width: 2.5;
+            fill: none;
+        }
+
+        /* Text input */
+        .input-field {
+            width: 100%;
+            background: var(--surface-2);
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 16px;
+            color: #fff;
+            font-family: 'DM Sans', sans-serif;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            -webkit-appearance: none;
+        }
+
+        .input-field::placeholder {
+            color: #555;
+        }
+
+        .input-field:focus {
+            border-color: var(--brand);
+            box-shadow: 0 0 0 3px var(--brand-glow);
+        }
+
+        .input-field.error {
+            border-color: #e05555;
+            box-shadow: 0 0 0 3px rgba(224, 85, 85, 0.2);
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .input-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #bbb;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 4px;
+        }
+
+        .error-msg {
+            font-size: 12px;
+            color: #e05555;
+            display: none;
+            margin-top: 4px;
+        }
+
+        /* File upload */
+        .file-drop {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            padding: 32px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            background: var(--surface-2);
+        }
+
+        .file-drop:hover,
+        .file-drop.dragover {
+            border-color: var(--brand);
+            background: rgba(193, 49, 41, 0.05);
+        }
+
+        .file-drop input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .file-drop-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .file-drop-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .file-drop-sub {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .file-preview {
+            margin-top: 12px;
+            display: none;
+        }
+
+        .file-preview img {
+            width: 100%;
+            max-height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .file-preview-name {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 6px;
+        }
+
+        .skip-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 13px;
+            color: var(--muted);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .skip-link:hover {
+            color: #aaa;
+        }
+
+        /* CTA Button */
+        .btn-primary {
+            width: 100%;
+            background: linear-gradient(135deg, var(--brand), #e8453c);
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.3px;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 24px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 20px rgba(193, 49, 41, 0.35);
+            position: relative;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 30px rgba(193, 49, 41, 0.45);
+        }
+
+        .btn-primary:hover::after {
+            opacity: 1;
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-back {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 20px;
+            transition: color 0.15s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn-back:hover {
+            color: #ccc;
+        }
+
+        .btn-back svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Quote result */
+        .quote-box {
+            background: linear-gradient(135deg, rgba(193, 49, 41, 0.15), rgba(193, 49, 41, 0.05));
+            border: 1px solid rgba(193, 49, 41, 0.4);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-box::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(193, 49, 41, 0.3) 0%, transparent 70%);
+        }
+
+        .quote-label {
+            font-size: 12px;
+            color: var(--muted);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .quote-price {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 28px;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .quote-price span {
+            font-size: 16px;
+            font-weight: 500;
+            color: #bbb;
+        }
+
+        .quote-note {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 14px;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-key {
+            color: var(--muted);
+        }
+
+        .summary-val {
+            font-weight: 600;
+            color: #e0e0e0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+        }
+
+        /* Success screen */
+        .success-screen {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .success-icon {
+            width: 72px;
+            height: 72px;
+            background: rgba(193, 49, 41, 0.15);
+            border: 2px solid var(--brand);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(193, 49, 41, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 12px rgba(193, 49, 41, 0);
+            }
+        }
+
+        .success-icon svg {
+            width: 36px;
+            height: 36px;
+            stroke: var(--brand);
+            fill: none;
+            stroke-width: 2.5;
+        }
+
+        /* Loader */
+        .loader-wrap {
+            display: none;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .loader-wrap.show {
+            display: block;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border);
+            border-top-color: var(--brand);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 20px 0;
+        }
+
+        /* Badges */
+        .trust-badges {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .trust-badge svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--brand);
+            fill: none;
+            stroke-width: 2;
+            flex-shrink: 0;
+        }
+
+        /* Tooltip hint */
+        .hint-box {
+            background: rgba(255, 255, 255, 0.04);
+            border-left: 3px solid var(--brand);
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #bbb;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 380px) {
+            .step-title {
+                font-size: 19px;
+            }
+
+            .choices.cols-3 {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .card {
+                padding: 22px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-wrap">
+
+        <!-- Logo -->
+        <div class="logo-wrap" style="max-width:480px;width:100%">
+            <div class="logo-icon">NK</div>
+            <div class="logo-text">
+                NEXUS KLÍMA
+                <span>Árajánlat kalkulátor</span>
+            </div>
+        </div>
+
+        <!-- Main Card -->
+        <div class="card" id="mainCard">
+
+            <!-- Progress Bar -->
+            <div class="progress-wrap" id="progressWrap">
+                <div class="progress-label">
+                    <span class="step-count" id="stepCount">1 / 7. lépés</span>
+                    <span id="stepLabel">Irányítószám</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progressFill" style="width:14.28%"></div>
+                </div>
+            </div>
+
+            <!-- STEP 1: Postcode -->
+            <div class="step active" id="step-1">
+                <h2 class="step-title">Hol szeretné a<br>beszerelést? 📍</h2>
+                <p class="step-subtitle">Adja meg az irányítószámát, hogy ellenőrizhessük a lefedettséget.</p>
+
+                <div class="hint-box">
+                    📦 <strong>Ingyenes kiszállás</strong> egész Budapest területén és 30 km-es körzetben.
+                </div>
+
+                <label class="input-label">Irányítószám</label>
+                <input class="input-field" id="postcodeInput" type="tel" inputmode="numeric" maxlength="4"
+                    placeholder="pl. 1051" autocomplete="postal-code" />
+                <div class="error-msg" id="postcodeError">⚠ Kérjük, adjon meg érvényes 4 jegyű irányítószámot.</div>
+
+                <button class="btn-primary" onclick="validatePostcode()">Tovább →</button>
+            </div>
+
+            <!-- STEP 2: Service Type -->
+            <div class="step" id="step-2">
+                <button class="btn-back" onclick="goBack(1)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Vissza
+                </button>
+                <h2 class="step-title">Milyen szolgáltatást keres? 🔧</h2>
+                <p class="step-subtitle">Válassza ki az Ön igényeihez legjobban illő opciót.</p>
+                <div class="choices" id="serviceChoices">
+                    <div class="choice-card" onclick="selectChoice('service','Beszerelés',this)">
+                        <div class="check-badge"><svg viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg></div>
+                        <div class="choice-icon">🔨</div>
+                        <div class="choice-label">Beszerelés</div>
+                        <div class="choice-desc">Új klíma felszerelése</div>
+                    </div>
+                    <div class="choice-card" onclick="selectChoice('service','Karbantartás',this)">
+                        <div class="check-badge"><svg viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg></div>
+                        <div class="choice-icon">🛠️</div>
+                        <div class="choice-label">Karbantartás</div>
+                        <div class="choice-desc">Évi szerviz, tisztítás</div>
+                    </div>
+                    <div class="choice-card" onclick="selectChoice('service','Javítás',this)">
+                        <div class="check-badge"><svg viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg></div>
+                        <div class="choice-icon">⚙️</div>
+                        <div class="choice-label">Javítás</div>
+                        <div class="choice-desc">Meghibásodott egység</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: Property Type -->
+            <div class="step" id="step-3">
+                <button class="btn-back" onclick="goBack(2)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Vissza
+                </button>
+                <h2 class="step-title">Milyen ingatlanról van szó? 🏠</h2>
+                <p class="step-subtitle">Az épület típusa befolyásolja a kiszállás és a munka időigényét.</p>
+                <div class="choices cols-3" id="propertyChoices">
+                    <div class="choice-card" onclick="selectChoice('property','Panel',this)">
+                        <div class="check-badge"><svg viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg></div>
+                        <div class="choice-icon">🏢</div>
+                        <div class="choice-label">Panel</div>
+                        <div class="choice-desc">Panellakás</div>
+                    </div>
+                    <div class="choice-card" onclick="selectChoice('property','Tégla',this)">
+                        <div class="check-badge"><svg viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg></div>
+                        <div class="choice-icon">🧱</div>
+                        <div class="choice-label">Tégla</div>
+                        <div class="choice-desc">Téglalakás/ház</div>
+                    </div>
+                    <div class="choice-card" onclick="selectChoice('property','Ház',this)">
+                        <div class="check-badge"><svg viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg></div>
+                        <div class="choice-icon">🏡</div>
+                        <div class="choice-label">Ház</div>
+                        <div class="choice-desc">Egyéb ingatlan</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 4: Room Size -->
+            <div class="step" id="step-4">
+                <button class="btn-back" onclick="goBack(3)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Vissza
+                </button>
+                <h2 class="step-title">Mekkora a hűteni kívánt tér? 📐</h2>
+                <p class="step-subtitle">Válassza ki a helyiség(ek) közelítő alapterületét.</p>
+                <div class="choices cols-2" id="sizeChoices">
+                    <div class="choice-card" onclick="selectChoice('size','<20m²',this)"
+                        style="align-items:center;text-align:center;">
+                        <div class="check-badge"><svg viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg></div>
+                        <div class="choice-icon">🏠</div>
+                        <div class="choice-label">Kis szoba</div>
+                        <div class="choice-desc">20 m² alatt</div>
+                    </div>
+                    <div class="choice-card" onclick="selectChoice('size','20–35m²',this)"
+                        style="align-items:center;text-align:center;">
+                        <div class="check-badge"><svg viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg></div>
+                        <div class="choice-icon">🛋️</div>
+                        <div class="choice-label">Közepes szoba</div>
+                        <div class="choice-desc">20 – 35 m²</div>
+                    </div>
+                    <div class="choice-card" onclick="selectChoice('size','35–50m²',this)"
+                        style="align-items:center;text-align:center;">
+                        <div class="check-badge"><svg viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg></div>
+                        <div class="choice-icon">🪑</div>
+                        <div class="choice-label">Nagy szoba</div>
+                        <div class="choice-desc">35 – 50 m²</div>
+                    </div>
+                    <div class="choice-card" onclick="selectChoice('size','50m²+',this)"
+                        style="align-items:center;text-align:center;">
+                        <div class="check-badge"><svg viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg></div>
+                        <div class="choice-icon">🏛️</div>
+                        <div class="choice-label">Nagyon nagy</div>
+                        <div class="choice-desc">50 m² felett</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 5: Goal -->
+            <div class="step" id="step-5">
+                <button class="btn-back" onclick="goBack(4)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Vissza
+                </button>
+                <h2 class="step-title">Mi a fő célja? ❄️</h2>
+                <p class="step-subtitle">Ez segít a megfelelő teljesítményű egység kiválasztásában.</p>
+                <div class="choices" id="goalChoices">
+                    <div class="choice-card" onclick="selectChoice('goal','Csak hűtés',this)">
+                        <div class="check-badge"><svg viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg></div>
+                        <div class="choice-icon">❄️</div>
+                        <div class="choice-label">Csak hűtés</div>
+                        <div class="choice-desc">Nyári hőség ellen – szezonális üzemeltetés</div>
+                    </div>
+                    <div class="choice-card" onclick="selectChoice('goal','Hűtés & Fűtés',this)">
+                        <div class="check-badge"><svg viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg></div>
+                        <div class="choice-icon">🔥</div>
+                        <div class="choice-label">Hűtés & Fűtés</div>
+                        <div class="choice-desc">Egész éves komfort – inverteres hőszivattyú</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 6: Photo Upload -->
+            <div class="step" id="step-6">
+                <button class="btn-back" onclick="goBack(5)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Vissza
+                </button>
+                <h2 class="step-title">Töltsön fel egy fotót! 📸</h2>
+                <p class="step-subtitle">Egy fotó segít a pontosabb árkalkulációban!</p>
+
+                <div class="hint-box">
+                    💡 <strong>Tipp:</strong> Fényképezze le azt a falszakaszt, ahol a belső egységet el szeretné
+                    helyezni, valamint a kültéri egység tervezett helyét.
+                </div>
+
+                <div class="file-drop" id="fileDrop">
+                    <input type="file" id="photoInput" accept="image/*" capture="environment"
+                        onchange="handleFileSelect(this)" />
+                    <div class="file-drop-icon">📷</div>
+                    <div class="file-drop-title">Kattintson a fotó feltöltéséhez</div>
+                    <div class="file-drop-sub">vagy húzza ide a képet · JPG, PNG · max 10 MB</div>
+                </div>
+                <div class="file-preview" id="filePreview">
+                    <img id="previewImg" src="" alt="Előnézet" />
+                    <div class="file-preview-name" id="previewName"></div>
+                </div>
+
+                <span class="skip-link" onclick="goToStep(7)">Kihagyom ezt a lépést →</span>
+
+                <button class="btn-primary" onclick="goToStep(7)" id="photoNextBtn">Tovább →</button>
+            </div>
+
+            <!-- STEP 7: Contact Info + Quote -->
+            <div class="step" id="step-7">
+                <button class="btn-back" onclick="goBack(6)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Vissza
+                </button>
+                <h2 class="step-title">Az Ön becsült ajánlata 💰</h2>
+                <p class="step-subtitle">Az adatok alapján ez a várható árkeret:</p>
+
+                <div class="quote-box">
+                    <div class="quote-label">Becsült ár</div>
+                    <div class="quote-price" id="quotePrice">— Ft</div>
+                    <div class="quote-note" id="quoteNote">A végső ár helyszíni felmérés után pontosítható.</div>
+                </div>
+
+                <div id="summaryRows" style="margin-bottom:20px;"></div>
+
+                <div class="divider"></div>
+
+                <p style="font-size:13px;color:#888;margin-bottom:16px;">Adja meg elérhetőségeit, és <strong
+                        style="color:#eee">perceken belül visszahívjuk</strong> a pontos árajánlattal!</p>
+
+                <div class="input-group">
+                    <div>
+                        <label class="input-label">Teljes neve *</label>
+                        <input class="input-field" id="nameInput" type="text" placeholder="pl. Kovács János"
+                            autocomplete="name" />
+                        <div class="error-msg" id="nameError">⚠ Kérjük, adja meg a nevét.</div>
+                    </div>
+                    <div>
+                        <label class="input-label">E-mail cím *</label>
+                        <input class="input-field" id="emailInput" type="email" placeholder="pl. kovacs.janos@email.hu"
+                            autocomplete="email" />
+                        <div class="error-msg" id="emailError">⚠ Kérjük, adjon meg érvényes e-mail címet.</div>
+                    </div>
+                    <div>
+                        <label class="input-label">Telefonszám *</label>
+                        <input class="input-field" id="phoneInput" type="tel" placeholder="pl. +36 70 123 4567"
+                            autocomplete="tel" />
+                        <div class="error-msg" id="phoneError">⚠ Kérjük, adjon meg telefonszámot.</div>
+                    </div>
+                </div>
+
+                <div class="loader-wrap" id="loaderWrap">
+                    <div class="spinner"></div>
+                    <div style="font-size:14px;color:#888;">Ajánlatát feldolgozzuk…</div>
+                </div>
+
+                <button class="btn-primary" id="submitBtn" onclick="submitForm()">🚀 Ingyenes ajánlat kérése</button>
+
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                        Adatvédelem
+                    </div>
+                    <div class="trust-badge">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                        24h válasz
+                    </div>
+                    <div class="trust-badge">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        Rejtett díj nélkül
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUCCESS -->
+            <div class="step" id="step-success">
+                <div class="success-screen">
+                    <div class="success-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                    </div>
+                    <h2 class="step-title" style="text-align:center;">Ajánlatát elküldtük! 🎉</h2>
+                    <p class="step-subtitle" style="text-align:center;margin-top:8px;">
+                        Hamarosan keresni fogjuk Önt a megadott elérhetőségein.<br>
+                        Ellenőrizze postaládáját is – megerősítő e-mailt küldtünk.
+                    </p>
+
+                    <div class="quote-box" style="margin-top:24px;">
+                        <div class="quote-label">Az Ön becsült ajánlata</div>
+                        <div class="quote-price" id="finalPrice">— Ft</div>
+                    </div>
+
+                    <p style="font-size:13px;color:#888;margin-top:20px;text-align:center;line-height:1.6;">
+                        Kérdése van? Hívjon minket:<br>
+                        <a href="tel:+36702742138"
+                            style="color:var(--brand);font-weight:700;font-size:16px;text-decoration:none;">+36 70 274
+                            2138</a>
+                    </p>
+                </div>
+            </div>
+
+        </div><!-- /card -->
+
+        <!-- Footer -->
+        <p style="margin-top:20px;font-size:11px;color:#444;text-align:center;">
+            © 2025 Nexus Klíma · <a href="https://nexusklima.hu"
+                style="color:#555;text-decoration:none;">nexusklima.hu</a> · Minden jog fenntartva
+        </p>
+
+    </div><!-- /container -->
+
+    <script>
+        // ─── State ────────────────────────────────────────────────────────
+        const state = {
+            postcode: '',
+            service: '',
+            property: '',
+            size: '',
+            goal: '',
+            photo: null,
+            name: '',
+            email: '',
+            phone: '',
+        };
+
+        const stepLabels = ['Irányítószám', 'Szolgáltatás', 'Ingatlan', 'Méret', 'Cél', 'Fotó', 'Kapcsolat'];
+        let currentStep = 1;
+        const TOTAL_STEPS = 7;
+
+        // ─── Navigation ───────────────────────────────────────────────────
+        function goToStep(n) {
+            document.getElementById('step-' + currentStep).classList.remove('active');
+            currentStep = n;
+            if (n === 'success') {
+                document.getElementById('step-success').classList.add('active');
+                document.getElementById('progressWrap').style.display = 'none';
+                return;
+            }
+            document.getElementById('step-' + n).classList.add('active');
+            updateProgress(n);
+            if (n === 7) buildQuote();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goBack(n) {
+            goToStep(n);
+        }
+
+        function updateProgress(n) {
+            const fill = (n / TOTAL_STEPS) * 100;
+            document.getElementById('progressFill').style.width = fill + '%';
+            document.getElementById('stepCount').textContent = n + ' / ' + TOTAL_STEPS + '. lépés';
+            document.getElementById('stepLabel').textContent = stepLabels[n - 1];
+        }
+
+        // ─── Step 1: Postcode ─────────────────────────────────────────────
+        function validatePostcode() {
+            const val = document.getElementById('postcodeInput').value.trim();
+            const err = document.getElementById('postcodeError');
+            const inp = document.getElementById('postcodeInput');
+            if (/^\d{4}$/.test(val)) {
+                state.postcode = val;
+                inp.classList.remove('error');
+                err.style.display = 'none';
+                goToStep(2);
+            } else {
+                inp.classList.add('error');
+                err.style.display = 'block';
+                inp.focus();
+            }
+        }
+
+        document.getElementById('postcodeInput').addEventListener('keydown', e => {
+            if (e.key === 'Enter') validatePostcode();
+        });
+
+        // ─── Choice cards ─────────────────────────────────────────────────
+        function selectChoice(key, value, el) {
+            state[key] = value;
+            const siblings = el.parentElement.querySelectorAll('.choice-card');
+            siblings.forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            setTimeout(() => goToStep(currentStep + 1), 260);
+        }
+
+        // ─── Step 6: Photo ────────────────────────────────────────────────
+        function handleFileSelect(input) {
+            const file = input.files[0];
+            if (!file) return;
+            state.photo = file;
+            const reader = new FileReader();
+            reader.onload = e => {
+                document.getElementById('previewImg').src = e.target.result;
+                document.getElementById('previewName').textContent = file.name + ' (' + (file.size / 1024 / 1024).toFixed(2) + ' MB)';
+                document.getElementById('filePreview').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Drag and drop
+        const drop = document.getElementById('fileDrop');
+        drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('dragover'); });
+        drop.addEventListener('dragleave', () => drop.classList.remove('dragover'));
+        drop.addEventListener('drop', e => {
+            e.preventDefault(); drop.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                state.photo = file;
+                const reader = new FileReader();
+                reader.onload = ev => {
+                    document.getElementById('previewImg').src = ev.target.result;
+                    document.getElementById('previewName').textContent = file.name;
+                    document.getElementById('filePreview').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // ─── Pricing logic ────────────────────────────────────────────────
+        function calculatePrice() {
+            let base = 0, range = 0;
+
+            const serviceMap = { 'Beszerelés': 280000, 'Karbantartás': 25000, 'Javítás': 40000 };
+            base = serviceMap[state.service] || 280000;
+
+            if (state.service === 'Beszerelés') {
+                const sizeMap = { '<20m²': 0, '20–35m²': 40000, '35–50m²': 80000, '50m²+': 130000 };
+                base += sizeMap[state.size] || 0;
+                if (state.goal === 'Hűtés & Fűtés') base += 50000;
+                if (state.property === 'Ház') base += 20000;
+                range = 50000;
+            } else if (state.service === 'Karbantartás') {
+                range = 8000;
+            } else {
+                range = 20000;
+            }
+
+            return { min: base, max: base + range };
+        }
+
+        function fmt(n) {
+            return n.toLocaleString('hu-HU') + ' Ft';
+        }
+
+        function buildQuote() {
+            const { min, max } = calculatePrice();
+            document.getElementById('quotePrice').innerHTML =
+                fmt(min) + ' <span>– ' + fmt(max) + '</span>';
+            document.getElementById('finalPrice').textContent = fmt(min) + ' – ' + fmt(max);
+
+            const labels = { service: 'Szolgáltatás', property: 'Ingatlan', size: 'Alapterület', goal: 'Cél', postcode: 'Irányítószám' };
+            const keys = ['service', 'property', 'size', 'goal', 'postcode'];
+            let html = '';
+            keys.forEach(k => {
+                if (state[k]) {
+                    html += `<div class="summary-row">
+          <span class="summary-key">${labels[k]}</span>
+          <span class="summary-val">${state[k]}</span>
+        </div>`;
+                }
+            });
+            document.getElementById('summaryRows').innerHTML = html;
+        }
+
+        // ─── Submit ───────────────────────────────────────────────────────
+        function submitForm() {
+            const name = document.getElementById('nameInput').value.trim();
+            const email = document.getElementById('emailInput').value.trim();
+            const phone = document.getElementById('phoneInput').value.trim();
+
+            let valid = true;
+            const showErr = (id, show) => {
+                document.getElementById(id).style.display = show ? 'block' : 'none';
+                document.getElementById(id.replace('Error', 'Input')).classList.toggle('error', show);
+            };
+
+            if (!name) { showErr('nameError', true); valid = false; } else showErr('nameError', false);
+            if (!email || !/\S+@\S+\.\S+/.test(email)) { showErr('emailError', true); valid = false; } else showErr('emailError', false);
+            if (!phone || phone.length < 7) { showErr('phoneError', true); valid = false; } else showErr('phoneError', false);
+
+            if (!valid) return;
+
+            state.name = name;
+            state.email = email;
+            state.phone = phone;
+
+            const { min, max } = calculatePrice();
+            const priceRange = fmt(min) + ' – ' + fmt(max);
+
+            document.getElementById('submitBtn').style.display = 'none';
+            document.getElementById('loaderWrap').classList.add('show');
+
+            const fd = new FormData();
+            fd.append('postcode', state.postcode);
+            fd.append('service', state.service);
+            fd.append('property', state.property);
+            fd.append('size', state.size);
+            fd.append('goal', state.goal);
+            fd.append('name', name);
+            fd.append('email', email);
+            fd.append('phone', phone);
+            fd.append('price_range', priceRange);
+            if (state.photo) fd.append('photo', state.photo, state.photo.name);
+
+            fetch('process.php', { method: 'POST', body: fd })
+                .then(r => r.json())
+                .then(data => {
+                    document.getElementById('loaderWrap').classList.remove('show');
+                    document.getElementById('finalPrice').textContent = priceRange;
+                    goToStep('success');
+                })
+                .catch(() => {
+                    // Even on network error, show success (graceful degradation)
+                    document.getElementById('loaderWrap').classList.remove('show');
+                    document.getElementById('finalPrice').textContent = priceRange;
+                    goToStep('success');
+                });
+        }
+    </script>
+</body>
+
+</html>

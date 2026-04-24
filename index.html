@@ -213,7 +213,865 @@ if (empty($_SESSION['csrf_token'])) {
   <noscript><img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=263438605996534&ev=PageView&noscript=1" /></noscript>
   <!-- End Meta Pixel Code -->
+
+  <!-- Lead Qualifier Integration -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#c13129',
+            'brand-dark': '#9e2520',
+            'brand-light': '#e03c33',
+            gold: '#d4af37',
+            'gold-light': '#f5d061',
+            surface: '#1a1a1a',
+            'surface-2': '#222222',
+            'surface-3': '#2a2a2a',
+            border: '#333333',
+          },
+          fontFamily: {
+            heading: ['Montserrat', 'sans-serif'],
+            body: ['DM Sans', 'sans-serif'],
+          },
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --brand: #e31c25;
+      --brand-dark: #b3191f;
+      --brand-glow: rgba(227, 28, 37, 0.2);
+      --gold: #d4af37;
+      --surface: rgba(22, 22, 22, 0.85);
+      --surface-2: rgba(32, 32, 32, 0.9);
+      --surface-3: rgba(45, 45, 45, 1);
+      --border: rgba(212, 175, 55, 0.25);
+      --radius: 24px;
+    }
+
+    /* Lead Qualifier Specific Styles - Premium Nexus Polish */
+    .contact.qualifier-section {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: clamp(72px, 9vw, 120px) 18px clamp(88px, 10vw, 132px);
+      gap: 0;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.12), transparent 34%),
+        radial-gradient(circle at 16% 38%, rgba(227, 28, 37, 0.12), transparent 28%),
+        linear-gradient(180deg, #050505 0%, #0b0b0b 48%, #050505 100%);
+    }
+
+    .contact.qualifier-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(circle at center, black 0%, transparent 72%);
+      pointer-events: none;
+    }
+
+    .qualifier-shell {
+      width: min(100%, 1060px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 520px);
+      align-items: center;
+      gap: clamp(32px, 6vw, 76px);
+    }
+
+    .qualifier-intro {
+      text-align: left;
+      max-width: 520px;
+    }
+
+    .qualifier-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .qualifier-kicker::before {
+      content: '';
+      width: 34px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    .qualifier-title {
+      color: #fff;
+      font-size: clamp(34px, 5.4vw, 66px);
+      font-weight: 800;
+      letter-spacing: -0.055em;
+      line-height: 0.95;
+      margin: 0 0 22px;
+    }
+
+    .qualifier-title span {
+      color: var(--gold);
+      text-shadow: 0 0 32px rgba(212, 175, 55, 0.18);
+    }
+
+    .qualifier-lead {
+      color: #c8c8c8;
+      font-size: clamp(16px, 1.7vw, 20px);
+      line-height: 1.65;
+      margin: 0 0 28px;
+      max-width: 500px;
+    }
+
+    .qualifier-proof {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 500px;
+    }
+
+    .qualifier-proof__item {
+      min-height: 92px;
+      padding: 16px 14px;
+      border: 1px solid rgba(212, 175, 55, 0.18);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.035);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .qualifier-proof__value {
+      display: block;
+      color: #fff;
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .qualifier-proof__label {
+      color: #8f8f8f;
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .qualifier-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 520px;
+      padding: 40px 32px;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+      margin: 0 auto;
+      text-align: left;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .qualifier-card h2 {
+      color: #fff;
+      font-size: clamp(24px, 3vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.13;
+      margin: 0 0 12px;
+    }
+
+    .qualifier-card p {
+      color: #aaa;
+      font-size: 15px;
+      line-height: 1.55;
+      margin: 0 0 22px;
+    }
+
+    .qualifier-card label {
+      display: block;
+      color: #8a8a8a;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .qualifier-card .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .qualifier-card .grid-cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .qualifier-card .grid-cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .qualifier-card .flex {
+      display: flex;
+      align-items: center;
+    }
+
+    .qualifier-card .items-center {
+      align-items: center;
+    }
+
+    .qualifier-card .text-center {
+      text-align: center;
+    }
+
+    .qualifier-card .choice-card.items-center {
+      align-items: center;
+    }
+
+    .qualifier-card .gap-4 {
+      gap: 16px;
+    }
+
+    .qualifier-card .space-y-4 > * + * {
+      margin-top: 16px;
+    }
+
+    .qualifier-card .hidden {
+      display: none !important;
+    }
+
+    .qualifier-card .text-gold {
+      color: var(--gold);
+    }
+
+    .qualifier-card .text-white {
+      color: #fff;
+    }
+
+    .qualifier-card .text-gray-400,
+    .qualifier-card .text-gray-500,
+    .qualifier-card .text-gray-600 {
+      color: #9a9a9a;
+    }
+
+    .qualifier-card .font-bold,
+    .qualifier-card .font-black {
+      font-weight: 800;
+    }
+
+    .qualifier-card .uppercase {
+      text-transform: uppercase;
+    }
+
+    .qualifier-card .text-left {
+      text-align: left;
+    }
+
+    .qualifier-card .text-center {
+      text-align: center;
+    }
+
+    .qualifier-card .rounded-xl {
+      border-radius: 16px;
+    }
+
+    .qualifier-card .bg-black\/20 {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .qualifier-card .p-2 {
+      padding: 8px;
+    }
+
+    .qualifier-card .mb-6 {
+      margin-bottom: 24px;
+    }
+
+    .qualifier-card .mb-8 {
+      margin-bottom: 32px;
+    }
+
+    .qualifier-card .mt-6 {
+      margin-top: 24px;
+    }
+
+    .qualifier-card .mt-8,
+    .qualifier-card .btn {
+      margin-top: 28px;
+    }
+
+    .qualifier-card .mx-auto {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .qualifier-card .inline-block {
+      display: inline-block;
+    }
+
+    .qualifier-card .relative {
+      position: relative;
+    }
+
+    .qualifier-card .absolute {
+      position: absolute;
+    }
+
+    .qualifier-card .max-h-48 {
+      max-height: 192px;
+    }
+
+    .qualifier-card img.max-h-48 {
+      width: auto;
+      max-width: 100%;
+      object-fit: cover;
+    }
+
+    .qualifier-card .w-full {
+      width: 100%;
+    }
+
+    .qualifier-progress {
+      margin-bottom: 34px;
+    }
+
+    .qualifier-progress__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 18px;
+      margin-bottom: 12px;
+    }
+
+    .qualifier-progress__eyebrow {
+      display: block;
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      line-height: 1;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    .qualifier-progress__label {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .qualifier-progress__count {
+      flex: 0 0 auto;
+      color: #9f9f9f;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 6px 11px;
+    }
+
+    .qualifier-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.5;
+    }
+
+    .progress-bar-bg {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 99px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), #f5d061);
+      border-radius: 99px;
+      transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    }
+
+    .step {
+      display: none;
+      animation: premiumFadeUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    .step.active { display: block; }
+
+    @keyframes premiumFadeUp {
+      from { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    .choice-card {
+      background: var(--surface-2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .choice-card .font-bold {
+      color: #fff;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .choice-card .text-xs {
+      color: #8f8f8f;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .choice-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 25% 20%, rgba(212, 175, 55, 0.12), transparent 65%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .choice-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(212, 175, 55, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .choice-card:hover::before,
+    .choice-card.selected::before {
+      opacity: 1;
+    }
+
+    .choice-card.selected {
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.08);
+      box-shadow: 0 0 0 1px var(--gold), 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .check-badge {
+      position: absolute; top: 12px; right: 12px; width: 22px; height: 22px;
+      border-radius: 50%; background: var(--gold); display: flex;
+      align-items: center; justify-content: center; opacity: 0;
+      transform: scale(0); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .choice-card.selected .check-badge { opacity: 1; transform: scale(1); }
+
+    .input-field {
+      width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px; padding: 16px 20px; font-size: 16px; color: #fff;
+      outline: none; transition: all 0.3s ease;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .input-field:focus {
+      border-color: var(--gold);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+    }
+
+    .input-field.error { border-color: var(--brand); box-shadow: 0 0 0 4px rgba(227, 28, 37, 0.1); }
+
+    .field-error {
+      display: none;
+      color: #ff6b6b;
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    .field-error.show {
+      display: block;
+    }
+
+    .file-drop {
+      border: 2px dashed rgba(212, 175, 55, 0.2); border-radius: 20px;
+      padding: 40px 24px; text-align: center; cursor: pointer;
+      transition: all 0.3s ease; position: relative; background: rgba(255, 255, 255, 0.02);
+    }
+
+    .file-drop:hover,
+    .file-drop.dragover {
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .file-drop input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .file-preview-name {
+      color: #a3a3a3;
+      font-size: 12px;
+      margin-top: 10px;
+      word-break: break-word;
+    }
+
+    .quote-box {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(0, 0, 0, 0.2));
+      border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 20px;
+      padding: 24px; margin-bottom: 24px; position: relative; overflow: hidden;
+    }
+
+    .summary-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); font-size: 15px;
+      gap: 16px;
+    }
+
+    .summary-row:last-child {
+      border-bottom: none;
+    }
+
+    .hint-box {
+      background: rgba(212, 175, 55, 0.05); border-left: 4px solid var(--gold);
+      border-radius: 4px 16px 16px 4px; padding: 14px 18px; margin-bottom: 24px;
+      font-size: 14px; color: #ccc; line-height: 1.6; text-align: left;
+    }
+
+    .loader-wrap { display: none; text-align: center; padding: 24px 0; }
+    .loader-wrap.show { display: block; }
+
+    .spinner {
+      width: 40px; height: 40px; border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top-color: var(--gold); border-radius: 50%;
+      animation: spin 1s linear infinite; margin: 0 auto 15px;
+    }
+
+    .qualifier-trust {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .qualifier-trust__item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: #8f8f8f;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .qualifier-trust__item svg {
+      width: 15px;
+      height: 15px;
+      color: var(--gold);
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.3;
+    }
+
+    .qualifier-note {
+      background: rgba(227, 28, 37, 0.08);
+      border: 1px solid rgba(227, 28, 37, 0.18);
+      border-radius: 18px;
+      color: #d7d7d7;
+      font-size: 13px;
+      line-height: 1.55;
+      padding: 14px 16px;
+    }
+
+    .qualifier-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #858585;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      margin: 0 0 24px;
+      padding: 0;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+
+    .qualifier-back:hover {
+      color: var(--gold);
+    }
+
+    .qualifier-back svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .qualifier-skip {
+      display: block;
+      width: 100%;
+      margin-top: 22px;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: #858585;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-align: center;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+
+    .qualifier-skip:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 560px) {
+      .contact {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .qualifier-card {
+        padding: 28px 18px;
+        border-radius: 22px;
+      }
+
+      .qualifier-card .grid.grid-cols-3,
+      .qualifier-card .grid.grid-cols-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .qualifier-card .choice-card {
+        padding: 16px;
+      }
+
+      .quote-box {
+        padding: 20px;
+      }
+
+      .summary-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 3px;
+      }
+
+      .qualifier-trust {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .qualifier-shell {
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+
+      .qualifier-intro {
+        text-align: center;
+        margin: 0 auto;
+      }
+
+      .qualifier-kicker {
+        justify-content: center;
+      }
+
+      .qualifier-kicker::after {
+        content: '';
+        width: 34px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--gold));
+      }
+
+      .qualifier-lead,
+      .qualifier-proof {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .contact.qualifier-section {
+        padding: 38px 12px 72px;
+        background:
+          radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.16), transparent 30%),
+          radial-gradient(circle at 16% 30%, rgba(227, 28, 37, 0.16), transparent 28%),
+          linear-gradient(180deg, #050505 0%, #0b0b0b 52%, #050505 100%);
+      }
+
+      .qualifier-shell {
+        gap: 20px;
+      }
+
+      .qualifier-intro {
+        max-width: 360px;
+      }
+
+      .qualifier-kicker {
+        font-size: 10px;
+        gap: 8px;
+        letter-spacing: 0.13em;
+        margin-bottom: 12px;
+      }
+
+      .qualifier-kicker::before,
+      .qualifier-kicker::after {
+        width: 22px;
+      }
+
+      .qualifier-title {
+        font-size: clamp(29px, 8.7vw, 36px);
+        letter-spacing: -0.06em;
+        line-height: 0.98;
+        margin-bottom: 14px;
+      }
+
+      .qualifier-lead {
+        font-size: 13px;
+        line-height: 1.55;
+        margin-bottom: 16px;
+      }
+
+      .qualifier-proof {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+      }
+
+      .qualifier-proof__item {
+        min-height: 58px;
+        padding: 10px 6px;
+        border-radius: 14px;
+      }
+
+      .qualifier-proof__value {
+        font-size: 15px;
+        margin-bottom: 3px;
+      }
+
+      .qualifier-proof__label {
+        font-size: 9px;
+        line-height: 1.25;
+      }
+
+      .qualifier-card {
+        max-width: 100%;
+        padding: 22px 16px;
+        border-radius: 20px;
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.58);
+      }
+
+      .qualifier-card h2 {
+        font-size: 21px;
+        line-height: 1.16;
+        margin-bottom: 8px;
+      }
+
+      .qualifier-card p {
+        font-size: 13px;
+        line-height: 1.48;
+        margin-bottom: 16px;
+      }
+
+      .qualifier-progress {
+        margin-bottom: 22px;
+      }
+
+      .qualifier-progress__top {
+        margin-bottom: 9px;
+      }
+
+      .qualifier-progress__label {
+        font-size: 15px;
+      }
+
+      .qualifier-progress__count {
+        font-size: 11px;
+        padding: 5px 9px;
+      }
+
+      .progress-bar-bg {
+        height: 5px;
+      }
+
+      .hint-box {
+        border-left-width: 3px;
+        border-radius: 4px 12px 12px 4px;
+        font-size: 12px;
+        line-height: 1.45;
+        margin-bottom: 16px;
+        padding: 11px 12px;
+      }
+
+      .input-field {
+        border-radius: 12px;
+        padding: 13px 14px;
+      }
+
+      .choice-card {
+        border-radius: 14px;
+      }
+
+      .file-drop {
+        border-radius: 16px;
+        padding: 26px 16px;
+      }
+
+      .qualifier-note {
+        border-radius: 14px;
+        font-size: 12px;
+        padding: 12px 13px;
+      }
+
+      .qualifier-back {
+        font-size: 11px;
+        margin-bottom: 18px;
+      }
+
+      .qualifier-card .mb-8 {
+        margin-bottom: 22px;
+      }
+
+      .qualifier-card .mt-8,
+      .qualifier-card .btn {
+        margin-top: 22px;
+      }
+
+      .qualifier-trust {
+        gap: 9px;
+        margin-top: 18px;
+      }
+    }
+  </style>
 </head>
+
 
 <body>
   <div class="site">
@@ -755,71 +1613,295 @@ if (empty($_SESSION['csrf_token'])) {
 
     </section>
 
-    <!-- ===== CONTACT ===== -->
-    <section class="contact" id="contact">
-      <p class="contact__teaser">Ne várd meg a 35 fokot, foglalj<br><span class="contact__teaser-accent">időpontot
-          most!</span></p>
+    <!-- ===== CONTACT (Lead Qualifier) ===== -->
+    <section class="contact qualifier-section" id="contact">
+      <div class="qualifier-shell">
+        <div class="qualifier-intro">
+          <span class="qualifier-kicker">Gyors ajánlatkérés</span>
+          <h2 class="qualifier-title">Klímaajánlat, ami nem csak <span>tippel</span>.</h2>
+          <p class="qualifier-lead">Pár kérdés alapján előzetes árkeretet mutatunk, majd szakember nézi át az igényét. Ha fotót is feltölt, pontosabban tudunk készüléket és szerelési megoldást javasolni.</p>
+          <div class="qualifier-proof">
+            <div class="qualifier-proof__item">
+              <span class="qualifier-proof__value">2 perc</span>
+              <span class="qualifier-proof__label">kitöltési idő</span>
+            </div>
+            <div class="qualifier-proof__item">
+              <span class="qualifier-proof__value">24 órán</span>
+              <span class="qualifier-proof__label">belüli visszahívás</span>
+            </div>
+            <div class="qualifier-proof__item">
+              <span class="qualifier-proof__value">0 Ft</span>
+              <span class="qualifier-proof__label">rejtett ajánlatkérési díj</span>
+            </div>
+          </div>
+        </div>
 
-      <div class="contact__card">
-        <h2 class="contact__title">Kérj Ingyenes<br>Árajánlatot!</h2>
-        <p class="contact__desc">Töltsd ki az alábbi űrlapot, és rövid időn belül felvesszük veled a kapcsolatot.</p>
+        <!-- Lead Qualifier Stepper -->
+        <div class="qualifier-card" id="mainCard">
+        <input type="hidden" id="csrfToken" value="<?php echo htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+        <input type="text" id="websiteField" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;">
 
-        <form class="contact__form" id="contactForm" action="contact.php" method="POST">
-          <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>" />
-          <div class="contact__field"
-            style="display: none !important; visibility: hidden !important; position: absolute !important; left: -9999px !important;">
-            <label for="website">Website</label>
-            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+        <!-- Progress Bar -->
+        <div class="qualifier-progress" id="progressWrap">
+          <div class="qualifier-progress__top">
+            <div>
+              <span class="qualifier-progress__eyebrow">Folyamat</span>
+              <span class="qualifier-progress__label" id="stepLabel">Irányítószám</span>
+            </div>
+            <span class="qualifier-progress__count" id="stepCount">1 / 7</span>
           </div>
-          <div class="contact__field">
-            <label class="contact__label" for="fName">Név</label>
-            <input class="contact__input" type="text" id="fName" name="name" placeholder="Teljes név" required />
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressFill" style="width:14.28%"></div>
           </div>
-          <div class="contact__field">
-            <label class="contact__label" for="fEmail">E-mail</label>
-            <input class="contact__input" type="email" id="fEmail" name="email" placeholder="email cím" required />
+        </div>
+
+        <!-- STEP 1: Postcode -->
+        <div class="step active" id="step-1">
+          <h2 class="text-2xl font-bold text-white mb-3 leading-tight">Kezdjük a legfontosabbal: <br>Hol van szükség a klímára? 📍</h2>
+          <p class="text-sm text-gray-400 mb-8">Adja meg az irányítószámát, hogy ellenőrizhessük a lefedettséget és a kiszállási feltételeket.</p>
+          <div class="hint-box">
+            <strong>Ingyenes kiszállás</strong> Budapest teljes területén és a 30 km-es vonzáskörzetében.
           </div>
-          <div class="contact__field">
-            <label class="contact__label" for="fPhone">Telefonszám</label>
-            <input class="contact__input" type="tel" id="fPhone" name="phone" placeholder="+36 70 274 2138" />
+          <div class="relative">
+            <label class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 block">Irányítószám</label>
+            <input class="input-field" id="postcodeInput" type="tel" inputmode="numeric" maxlength="4" placeholder="pl. 1083" autocomplete="postal-code" />
+            <div class="field-error" id="postcodeError">Kérjük, adjon meg érvényes 4 jegyű irányítószámot.</div>
           </div>
-          <div class="contact__field">
-            <label class="contact__label" for="fService">Szolgáltatás</label>
-            <select class="contact__input contact__select" id="fService" name="service">
-              <option value="" disabled selected>Milyen szolgáltatás iránt érdeklődsz?</option>
-              <option value="klimatelepites">Klímatelepítés</option>
-              <option value="eves_karbantartas">Éves karbantartás</option>
-              <option value="mely_tisztitas">Mély tisztítás</option>
-              <option value="egyeb">Egyéb</option>
-            </select>
+          <button class="btn btn--gold btn--full mt-8" onclick="validatePostcode()">Következő lépés →</button>
+        </div>
+
+        <!-- STEP 2: Service Type -->
+        <div class="step" id="step-2">
+          <button class="qualifier-back" onclick="goBack(1)">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg> Vissza
+          </button>
+          <h2 class="text-2xl font-bold text-white mb-2">Miben segíthetünk Önnek ma? 🔧</h2>
+          <p class="text-sm text-gray-400 mb-8">Válassza ki az Ön igényeinek megfelelő szolgáltatást.</p>
+          <div class="grid gap-3">
+            <div class="choice-card" onclick="selectChoice('service','Beszerelés',this)">
+              <div class="check-badge"><svg viewBox="0 0 24 24" class="w-3.5 h-3.5 stroke-black fill-none stroke-[3]"><polyline points="20 6 9 17 4 12" /></svg></div>
+              <div class="text-2xl mb-1">🔨</div>
+              <div class="font-bold text-white text-base">Klímatelepítés</div>
+              <div class="text-xs text-gray-500">Új készülék beszerelése garanciával</div>
+            </div>
+            <div class="choice-card" onclick="selectChoice('service','Karbantartás',this)">
+              <div class="check-badge"><svg viewBox="0 0 24 24" class="w-3.5 h-3.5 stroke-black fill-none stroke-[3]"><polyline points="20 6 9 17 4 12" /></svg></div>
+              <div class="text-2xl mb-1">🛠️</div>
+              <div class="font-bold text-white text-base">Karbantartás</div>
+              <div class="text-xs text-gray-500">Éves tisztítás és fertőtlenítés</div>
+            </div>
+            <div class="choice-card" onclick="selectChoice('service','Javítás',this)">
+              <div class="check-badge"><svg viewBox="0 0 24 24" class="w-3.5 h-3.5 stroke-black fill-none stroke-[3]"><polyline points="20 6 9 17 4 12" /></svg></div>
+              <div class="text-2xl mb-1">⚙️</div>
+              <div class="font-bold text-white text-base">Hibajavítás</div>
+              <div class="text-xs text-gray-500">Meghibásodott egységek szervizelése</div>
+            </div>
           </div>
-          <div class="contact__field">
-            <label class="contact__label" for="fMessage">Üzenet</label>
-            <textarea class="contact__input contact__textarea" id="fMessage" name="message"
-              placeholder="Küldj üzenetet nekünk!"></textarea>
+        </div>
+
+        <!-- STEP 3: Property Type -->
+        <div class="step" id="step-3">
+          <button class="qualifier-back" onclick="goBack(2)">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg> Vissza
+          </button>
+          <h2 class="text-2xl font-bold text-white mb-2">Milyen típusú ingatlanban gondolkodik? 🏠</h2>
+          <p class="text-sm text-gray-400 mb-8">Az épület típusa befolyásolja a telepítési technológiát.</p>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="choice-card items-center text-center py-6" onclick="selectChoice('property','Panel',this)">
+              <div class="check-badge"><svg viewBox="0 0 24 24" class="w-3.5 h-3.5 stroke-black fill-none stroke-[3]"><polyline points="20 6 9 17 4 12" /></svg></div>
+              <div class="text-3xl mb-2">🏢</div>
+              <div class="font-bold text-white text-sm">Panel</div>
+              <div class="text-xs text-gray-500">Panellakás</div>
+            </div>
+            <div class="choice-card items-center text-center py-6" onclick="selectChoice('property','Tégla',this)">
+              <div class="check-badge"><svg viewBox="0 0 24 24" class="w-3.5 h-3.5 stroke-black fill-none stroke-[3]"><polyline points="20 6 9 17 4 12" /></svg></div>
+              <div class="text-3xl mb-2">🧱</div>
+              <div class="font-bold text-white text-sm">Tégla</div>
+              <div class="text-xs text-gray-500">Lakás vagy ház</div>
+            </div>
+            <div class="choice-card items-center text-center py-6" onclick="selectChoice('property','Ház',this)">
+              <div class="check-badge"><svg viewBox="0 0 24 24" class="w-3.5 h-3.5 stroke-black fill-none stroke-[3]"><polyline points="20 6 9 17 4 12" /></svg></div>
+              <div class="text-3xl mb-2">🏡</div>
+              <div class="font-bold text-white text-sm">Ház</div>
+              <div class="text-xs text-gray-500">Családi ház</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: Size -->
+        <div class="step" id="step-4">
+          <button class="qualifier-back" onclick="goBack(3)">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg> Vissza
+          </button>
+          <h2 class="text-2xl font-bold text-white mb-2">Mekkora a hűteni vagy fűteni kívánt tér? 📐</h2>
+          <p class="text-sm text-gray-400 mb-6">Elég egy közelítő érték. A pontos teljesítményt a felmérésen véglegesítjük.</p>
+          <div class="grid grid-cols-2 gap-3 mt-6">
+            <div class="choice-card items-center text-center" onclick="selectChoice('size','20m² alatt',this)">
+              <div class="check-badge"><svg viewBox="0 0 24 24" class="w-3.5 h-3.5 stroke-black fill-none stroke-[3]"><polyline points="20 6 9 17 4 12" /></svg></div>
+              <div class="text-2xl mb-1">🏠</div>
+              <div class="font-bold text-white text-sm">Kis szoba</div>
+              <div class="text-xs text-gray-500">20 m² alatt</div>
+            </div>
+            <div class="choice-card items-center text-center" onclick="selectChoice('size','20–35m²',this)">
+              <div class="check-badge"><svg viewBox="0 0 24 24" class="w-3.5 h-3.5 stroke-black fill-none stroke-[3]"><polyline points="20 6 9 17 4 12" /></svg></div>
+              <div class="text-2xl mb-1">🛋️</div>
+              <div class="font-bold text-white text-sm">Közepes szoba</div>
+              <div class="text-xs text-gray-500">20 – 35 m²</div>
+            </div>
+            <div class="choice-card items-center text-center" onclick="selectChoice('size','35–50m²',this)">
+              <div class="check-badge"><svg viewBox="0 0 24 24" class="w-3.5 h-3.5 stroke-black fill-none stroke-[3]"><polyline points="20 6 9 17 4 12" /></svg></div>
+              <div class="text-2xl mb-1">🪑</div>
+              <div class="font-bold text-white text-sm">Nagy szoba</div>
+              <div class="text-xs text-gray-500">35 – 50 m²</div>
+            </div>
+            <div class="choice-card items-center text-center" onclick="selectChoice('size','50m²+',this)">
+              <div class="check-badge"><svg viewBox="0 0 24 24" class="w-3.5 h-3.5 stroke-black fill-none stroke-[3]"><polyline points="20 6 9 17 4 12" /></svg></div>
+              <div class="text-2xl mb-1">🏛️</div>
+              <div class="font-bold text-white text-sm">Nagyon nagy</div>
+              <div class="text-xs text-gray-500">50 m² felett</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5: Goal -->
+        <div class="step" id="step-5">
+          <button class="qualifier-back" onclick="goBack(4)">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg> Vissza
+          </button>
+          <h2 class="text-2xl font-bold text-white mb-2">Mi az Ön elsődleges célja a klímával? ❄️</h2>
+          <p class="text-sm text-gray-400 mb-6">Ez segít a megfelelő teljesítményű és fogyasztású készülék kiválasztásában.</p>
+          <div class="grid gap-3 mt-6">
+            <div class="choice-card" onclick="selectChoice('goal','Csak hűtés',this)">
+              <div class="check-badge"><svg viewBox="0 0 24 24" class="w-3.5 h-3.5 stroke-black fill-none stroke-[3]"><polyline points="20 6 9 17 4 12" /></svg></div>
+              <div class="flex items-center gap-4">
+                <div class="text-2xl">❄️</div>
+                <div>
+                  <div class="font-bold text-white text-base">Csak hűtés</div>
+                  <div class="text-xs text-gray-500">Hatékony hűtés a nyári napokra</div>
+                </div>
+              </div>
+            </div>
+            <div class="choice-card" onclick="selectChoice('goal','Hűtés & Fűtés',this)">
+              <div class="check-badge"><svg viewBox="0 0 24 24" class="w-3.5 h-3.5 stroke-black fill-none stroke-[3]"><polyline points="20 6 9 17 4 12" /></svg></div>
+              <div class="flex items-center gap-4">
+                <div class="text-2xl">🔥</div>
+                <div>
+                  <div class="font-bold text-white text-base">Hűtés és Fűtés</div>
+                  <div class="text-xs text-gray-500">Egész éves komfort (H-tarifa képes)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 6: Photo -->
+        <div class="step" id="step-6">
+          <button class="qualifier-back" onclick="goBack(5)">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg> Vissza
+          </button>
+          <h2 class="text-2xl font-bold text-white mb-3">Segítsen nekünk egy fotóval a pontosabb tervezéshez! 📸</h2>
+          <p class="text-sm text-gray-400 mb-6">Egy jól látható kép a tervezett helyről rengeteget segít a pontos árajánlatban.</p>
+          <div class="hint-box">
+            <strong>Tipp:</strong> fotózza le a beltéri egység tervezett falát és, ha lehet, a kültéri egység helyét is.
           </div>
 
-          <div class="contact__check">
-            <input type="checkbox" id="fGdpr" name="gdpr" required />
-            <label for="fGdpr">Elfogadom az <a href="privacy.html" class="contact__gdpr-link">Adatkezelési
-                tájékoztatót</a></label>
+          <div class="file-drop group" id="fileDrop">
+            <input type="file" id="photoInput" accept="image/*" capture="environment" onchange="handleFileSelect(this)" />
+            <div class="text-4xl mb-3 transition-transform group-hover:scale-110">📸</div>
+            <div class="text-sm font-bold text-white mb-1">Kattintson a feltöltéshez</div>
+            <div class="text-[10px] text-gray-500 uppercase tracking-widest">vagy húzza ide a képet · JPG/PNG · max. 10 MB</div>
           </div>
 
-          <button type="submit" class="btn btn--primary btn--large btn--full">Küldés</button>
-          <div class="form-separator">vagy</div>
-          <p class="contact__call-text">Hívj most!</p>
-          <a href="tel:+36702742138" class="btn btn--outline btn--large btn--full">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path
-                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-              </path>
-            </svg>
-            <span>+36 70 274 2138</span>
-          </a>
-        </form>
+          <div id="filePreview" class="mt-6 hidden">
+            <div class="relative inline-block mx-auto">
+              <img id="previewImg" class="rounded-xl max-h-48 border-2 border-gold/30 shadow-2xl" />
+              <div class="absolute -top-2 -right-2 bg-gold text-black rounded-full p-1 shadow-lg">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+            </div>
+            <div class="file-preview-name" id="previewName"></div>
+          </div>
+
+          <button class="btn btn--gold btn--full mt-8" onclick="goToStep(7)">Folytatás kalkulációhoz →</button>
+          <button class="qualifier-skip" onclick="goToStep(7)">Kihagyom ezt a lépést</button>
+        </div>
+
+        <!-- STEP 7: Final -->
+        <div class="step" id="step-7">
+          <button class="qualifier-back" onclick="goBack(6)">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg> Vissza
+          </button>
+          <h2 class="text-2xl font-bold text-white mb-2">Elkészült az Ön személyre szabott kalkulációja! 💰</h2>
+          <p class="text-sm text-gray-400 mb-8">Az adatai alapján ez a várható árkeret. A végleges ajánlatot szakember pontosítja.</p>
+
+          <div class="quote-box">
+            <div class="text-[10px] uppercase tracking-[3px] text-gold font-black mb-2">Becsült beruházási összeg</div>
+            <div class="text-3xl md:text-4xl font-black text-white" id="quotePrice">— Ft</div>
+            <p class="text-[10px] text-gray-500 mt-3 font-medium">A végső ár a helyszíni felmérés és a választott készülék típusa után válik véglegessé.</p>
+          </div>
+
+          <div id="summaryRows" class="mb-8 bg-black/20 rounded-xl p-2"></div>
+          <div class="qualifier-note mb-6">
+            Adja meg elérhetőségeit, és visszahívjuk a pontos árajánlattal. Nem automata ajánlatot küldünk: valódi szerelő nézi át az igényét.
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <label class="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-1.5 block ml-1">Teljes név *</label>
+              <input class="input-field" id="nameInput" type="text" placeholder="pl. Kovács János" autocomplete="name" />
+              <div class="field-error" id="nameError">Kérjük, adja meg a nevét.</div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-1.5 block ml-1">E-mail cím *</label>
+                <input class="input-field" id="emailInput" type="email" placeholder="pelda@email.hu" autocomplete="email" />
+                <div class="field-error" id="emailError">Kérjük, adjon meg érvényes e-mail címet.</div>
+              </div>
+              <div>
+                <label class="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-1.5 block ml-1">Telefonszám *</label>
+                <input class="input-field" id="phoneInput" type="tel" placeholder="+36 30 123 4567" autocomplete="tel" />
+                <div class="field-error" id="phoneError">Kérjük, adjon meg telefonszámot.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="loader-wrap" id="loaderWrap">
+            <div class="spinner"></div>
+            <div class="text-xs text-gold font-bold uppercase tracking-widest">Ajánlat véglegesítése...</div>
+          </div>
+
+          <button class="btn btn--primary btn--large btn--full mt-8 py-5 text-xl" id="submitBtn" onclick="submitForm()">🚀 Ingyenes ajánlat kérése</button>
+
+          <p class="text-[10px] text-gray-600 text-center mt-6 leading-relaxed">Az adatok elküldésével Ön elfogadja az Adatkezelési Tájékoztatónkat. <br> Szakembereink 24 órán belül felveszik Önnel a kapcsolatot.</p>
+          <div class="qualifier-trust">
+            <div class="qualifier-trust__item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg> Adatvédelem</div>
+            <div class="qualifier-trust__item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg> 24h válasz</div>
+            <div class="qualifier-trust__item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg> Rejtett díj nélkül</div>
+          </div>
+        </div>
+
+        <!-- SUCCESS -->
+        <div class="step" id="step-success">
+          <div class="text-center py-12">
+            <div class="w-24 h-24 bg-gold/10 border-2 border-gold rounded-full flex items-center justify-center mx-auto mb-8 shadow-[0_0_50px_rgba(212,175,55,0.2)]">
+              <svg viewBox="0 0 24 24" class="w-12 h-12 stroke-gold fill-none stroke-[3]"><polyline points="20 6 9 17 4 12" /></svg>
+            </div>
+            <h2 class="text-3xl font-black text-white mb-4">Sikeres igénylés! 🎉</h2>
+            <p class="text-gray-400 text-lg mb-8 leading-relaxed">Köszönjük bizalmát! <br> Kollégánk hamarosan keresni fogja Önt a megadott telefonszámon a pontos részletekkel.</p>
+            <div class="quote-box text-left">
+              <div class="text-[10px] uppercase tracking-[3px] text-gold font-black mb-2">Az Ön becsült ajánlata</div>
+              <div class="text-2xl md:text-3xl font-black text-white" id="finalPrice">— Ft</div>
+            </div>
+            <div class="h-px w-24 bg-gold/30 mx-auto mb-8"></div>
+            <p class="text-sm text-gray-500 mb-6">Kérdése van? Hívjon minket: <a href="tel:+36702742138" class="text-gold font-bold">+36 70 274 2138</a></p>
+            <p class="text-xs text-gray-500 font-bold uppercase tracking-[3px]">Nexus Klíma Csapata</p>
+          </div>
+        </div>
+
+        </div>
       </div>
     </section>
+
 
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
@@ -861,6 +1943,245 @@ if (empty($_SESSION['csrf_token'])) {
 
     <script src="js/main.js"></script>
 
+    <!-- Lead Qualifier JS Logic -->
+    <script>
+      const state = {
+        postcode: '',
+        service: '',
+        property: '',
+        size: '',
+        goal: '',
+        photo: null,
+        name: '',
+        email: '',
+        phone: ''
+      };
+      const stepLabels = ['Irányítószám', 'Szolgáltatás', 'Ingatlan', 'Méret', 'Cél', 'Fotó', 'Kapcsolat'];
+      const TOTAL_STEPS = 7;
+      let currentStep = 1;
+
+      function goToStep(n) {
+        if (currentStep === 'success') return;
+
+        const currentEl = document.getElementById('step-' + currentStep);
+        if (currentEl) currentEl.classList.remove('active');
+
+        currentStep = n;
+        if (n === 'success') {
+          document.getElementById('step-success').classList.add('active');
+          document.getElementById('progressWrap').style.display = 'none';
+          document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+
+        const nextEl = document.getElementById('step-' + n);
+        if (nextEl) nextEl.classList.add('active');
+        updateProgress(n);
+        if (n === 7) buildQuote();
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function goBack(n) {
+        goToStep(n);
+      }
+
+      function updateProgress(n) {
+        document.getElementById('progressFill').style.width = ((n / TOTAL_STEPS) * 100) + '%';
+        document.getElementById('stepCount').textContent = n + ' / ' + TOTAL_STEPS + '. lépés';
+        document.getElementById('stepLabel').textContent = stepLabels[n - 1];
+      }
+
+      function setFieldError(inputId, errorId, hasError) {
+        const input = document.getElementById(inputId);
+        const error = document.getElementById(errorId);
+        if (input) input.classList.toggle('error', hasError);
+        if (error) error.classList.toggle('show', hasError);
+      }
+
+      function validatePostcode() {
+        const val = document.getElementById('postcodeInput').value.trim();
+        const valid = /^\d{4}$/.test(val);
+        setFieldError('postcodeInput', 'postcodeError', !valid);
+        if (!valid) {
+          document.getElementById('postcodeInput').focus();
+          return;
+        }
+
+        state.postcode = val;
+        goToStep(2);
+      }
+
+      document.getElementById('postcodeInput').addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') validatePostcode();
+      });
+
+      function selectChoice(key, value, el) {
+        state[key] = value;
+        el.parentElement.querySelectorAll('.choice-card').forEach(card => card.classList.remove('selected'));
+        el.classList.add('selected');
+        setTimeout(() => goToStep(currentStep + 1), 260);
+      }
+
+      function previewFile(file) {
+        if (!file) return;
+
+        const validType = /^image\/(jpeg|png|webp|gif)$/i.test(file.type);
+        const validSize = file.size <= 10 * 1024 * 1024;
+        if (!validType || !validSize) {
+          alert('Kérjük JPG, PNG, WEBP vagy GIF képet töltsön fel, maximum 10 MB méretben.');
+          return;
+        }
+
+        state.photo = file;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          document.getElementById('previewImg').src = event.target.result;
+          document.getElementById('previewName').textContent = file.name + ' (' + (file.size / 1024 / 1024).toFixed(2) + ' MB)';
+          document.getElementById('filePreview').classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function handleFileSelect(input) {
+        previewFile(input.files[0]);
+      }
+
+      const drop = document.getElementById('fileDrop');
+      if (drop) {
+        drop.addEventListener('dragover', (event) => {
+          event.preventDefault();
+          drop.classList.add('dragover');
+        });
+        drop.addEventListener('dragleave', () => drop.classList.remove('dragover'));
+        drop.addEventListener('drop', (event) => {
+          event.preventDefault();
+          drop.classList.remove('dragover');
+          previewFile(event.dataTransfer.files[0]);
+        });
+      }
+
+      function calculatePrice() {
+        const serviceMap = { 'Beszerelés': 280000, 'Karbantartás': 25000, 'Javítás': 40000 };
+        let base = serviceMap[state.service] || 280000;
+        let range = 20000;
+
+        if (state.service === 'Beszerelés') {
+          const sizeMap = { '20m² alatt': 0, '20–35m²': 40000, '35–50m²': 80000, '50m²+': 130000 };
+          base += sizeMap[state.size] || 0;
+          if (state.goal === 'Hűtés & Fűtés') base += 50000;
+          if (state.property === 'Ház') base += 20000;
+          range = 50000;
+        } else if (state.service === 'Karbantartás') {
+          range = 8000;
+        }
+
+        return { min: base, max: base + range };
+      }
+
+      function fmt(n) {
+        return n.toLocaleString('hu-HU') + ' Ft';
+      }
+
+      function buildQuote() {
+        const { min, max } = calculatePrice();
+        const priceRange = fmt(min) + ' – ' + fmt(max);
+        document.getElementById('quotePrice').textContent = priceRange;
+        document.getElementById('finalPrice').textContent = priceRange;
+
+        const labels = {
+          service: 'Szolgáltatás',
+          property: 'Ingatlan',
+          size: 'Alapterület',
+          goal: 'Cél',
+          postcode: 'Irányítószám'
+        };
+
+        document.getElementById('summaryRows').innerHTML = ['service', 'property', 'size', 'goal', 'postcode']
+          .filter(key => state[key])
+          .map(key => `<div class="summary-row"><span class="text-gray-500">${labels[key]}</span><span class="text-white font-bold text-right">${state[key]}</span></div>`)
+          .join('');
+      }
+
+      function validateContactFields() {
+        const name = document.getElementById('nameInput').value.trim();
+        const email = document.getElementById('emailInput').value.trim();
+        const phone = document.getElementById('phoneInput').value.trim();
+        const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        const phoneValid = phone.replace(/[^\d+]/g, '').length >= 8;
+
+        setFieldError('nameInput', 'nameError', !name);
+        setFieldError('emailInput', 'emailError', !emailValid);
+        setFieldError('phoneInput', 'phoneError', !phoneValid);
+
+        return { valid: Boolean(name && emailValid && phoneValid), name, email, phone };
+      }
+
+      ['nameInput', 'emailInput', 'phoneInput'].forEach((id) => {
+        const input = document.getElementById(id);
+        if (input) {
+          input.addEventListener('input', () => input.classList.remove('error'));
+        }
+      });
+
+      document.getElementById('phoneInput').addEventListener('input', (event) => {
+        event.target.value = event.target.value.replace(/[^\d\s()+-]/g, '');
+      });
+
+      function setSubmitLoading(isLoading) {
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.style.display = isLoading ? 'none' : '';
+        submitBtn.disabled = isLoading;
+        document.getElementById('loaderWrap').classList.toggle('show', isLoading);
+      }
+
+      function submitForm() {
+        const result = validateContactFields();
+        if (!result.valid) return;
+
+        state.name = result.name;
+        state.email = result.email;
+        state.phone = result.phone;
+
+        const { min, max } = calculatePrice();
+        const priceRange = fmt(min) + ' – ' + fmt(max);
+        document.getElementById('finalPrice').textContent = priceRange;
+        setSubmitLoading(true);
+
+        const fd = new FormData();
+        const csrfToken = document.getElementById('csrfToken').value;
+        if (/^[a-f0-9]{64}$/i.test(csrfToken)) fd.append('csrf_token', csrfToken);
+        fd.append('website', document.getElementById('websiteField').value);
+        fd.append('postcode', state.postcode);
+        fd.append('service', state.service);
+        fd.append('property', state.property);
+        fd.append('size', state.size);
+        fd.append('goal', state.goal);
+        fd.append('name', result.name);
+        fd.append('email', result.email);
+        fd.append('phone', result.phone);
+        fd.append('price_range', priceRange);
+        if (state.photo) fd.append('photo', state.photo, state.photo.name);
+
+        fetch('contact.php', { method: 'POST', body: fd })
+          .then(response => response.json())
+          .then(data => {
+            setSubmitLoading(false);
+            if (data.status === 'success') {
+              if (window.fbq) fbq('track', 'Lead');
+              if (window.gtag) gtag('event', 'generate_lead', { event_category: 'Lead Qualifier' });
+              goToStep('success');
+              return;
+            }
+
+            alert(data.message || 'Hiba történt az ajánlatkérés elküldése közben. Kérjük próbálja újra.');
+          })
+          .catch(() => {
+            setSubmitLoading(false);
+            alert('Hálózati hiba történt. Kérjük próbálja újra, vagy hívjon minket telefonon.');
+          });
+      }
+    </script>
+
     <!-- Google Reviews Live API -->
     <script src="js/google-reviews.js"></script>
 
@@ -880,5 +2201,4 @@ if (empty($_SESSION['csrf_token'])) {
     </script>
   </div>
 </body>
-
 </html>
